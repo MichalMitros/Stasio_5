@@ -13,6 +13,14 @@ class Stasio {
     this.isAnimated = false;
   }
 
+  changeDance() {
+    if(random() < 0.5 && counter > 600) {
+      this.present_dance = floor(random(0, this.dances.length));
+      this.present_pose = 0;
+      counter = 0;
+    }
+  }
+
   changePose() {
     this.prev = this.dances[this.present_dance].poses[this.present_pose];
     this.present_pose++;
