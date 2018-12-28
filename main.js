@@ -8,24 +8,7 @@ function setup() {
 }
 
 function draw() {
-  if(isReady()) {
-    showTimer();
-  } else {
-    background(0);
-    noFill();
-    stroke(255);
-    strokeWeight(1);
-    translate(width/2, height/2);
-    if(stasio.isAnimated) {
-      stasio.animate();
-    } else {
-      stasio.show();
-      if(frameCount%60 == 0) {
-        stasio.changePose();
-      }
-
-    }
-  }
+  showTimer();
 }
 
 function windowResized() {
