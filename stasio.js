@@ -2,11 +2,11 @@
 class Stasio {
 
   constructor(dances, scale) {
-    this.present_dance = 0;
+    this.present_dance = 1;
     this.present_pose = 0;
     this.dances = dances;
     this.scale = scale;
-    this.animation_steps = 4;
+    this.animation_steps = 5;
     this.prev = undefined;
     this.pres = undefined;
     this.step = 0;
@@ -14,8 +14,12 @@ class Stasio {
   }
 
   changeDance() {
-    if(random() < 0.5 && counter > 600) {
-      this.present_dance = floor(random(0, this.dances.length));
+    if(random() < 0.05 && counter > 600) {
+      let id = floor(random);
+      if(this.dances.length > 1) {
+        while((this.present_dance = floor(random(0, this.dances.length))) === id);
+      }
+
       this.present_pose = 0;
       counter = 0;
     }

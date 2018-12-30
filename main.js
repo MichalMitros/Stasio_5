@@ -5,6 +5,7 @@ var counter;
 var prev_vol;
 var sum;
 var slider;
+var debug_mode = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -16,13 +17,15 @@ function setup() {
   prev_vol = 0;
   sum = 0;
   slider = createSlider(0.0001, 0.005, 0.0001, 0.00005);
-  slider.position(20, 50);
+  slider.position(20, -50);
   slider.style("width", "175px");
 }
 
 function draw() {
-  if(isReady()) {
+  if(!isReady()) {
     showTimer();
+  } else if(isRunning_timer) {
+    afterCounting();
   } else {
     background(0);
     noFill();
@@ -63,4 +66,26 @@ function windowResized() {
 function refreshStasio() {
   scl = windowHeight/16.5;
   stasio = new Stasio(createDances(), scl);
+}
+
+function keyPressed() {
+  if(key == ' ') {
+    if(debug_mode) {
+      debug_mode = false;
+      slider.position(20, -50);
+    } else {
+      debug_mode = true;
+      slider.position(20, 50);
+    }
+  }
+}
+
+function touchStarted() {
+  if(debug_mode) {
+    debug_mode = false;
+    slider.position(20, -50);
+  } else {
+    debug_mode = true;
+    slider.position(20, 50);
+  }
 }
