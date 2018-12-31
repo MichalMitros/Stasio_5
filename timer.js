@@ -68,6 +68,7 @@ function afterCounting() {
   if(counter_timer == 255) {
     isRunning_timer = false;
   } else {
+    background(0);
     fill(255-counter_timer, 0, 0);
     stroke(255-counter_timer, 0, 0);
     if(height < width) {
