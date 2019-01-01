@@ -22,7 +22,7 @@ function setup() {
 }
 
 function draw() {
-  if(!isReady()) {
+  if(false) {
     showTimer();
   } else if(isRunning_timer) {
     afterCounting();
