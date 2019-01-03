@@ -5,7 +5,7 @@ var counter_timer = 0;
 
 function isReady() {
   // return moment().year() === 2019;
-  return ready;
+  return true;
 }
 
 function showTimer() {
