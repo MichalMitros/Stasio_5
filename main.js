@@ -5,7 +5,9 @@ var counter;
 var prev_vol;
 var sum;
 var slider;
-var debug_mode = false;
+var show_settings = false;
+var last_update = "3/1/2019 14:56";
+var version = "5.2_5";
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -16,42 +18,40 @@ function setup() {
   counter = 0;
   prev_vol = 0;
   sum = 0;
-  slider = createSlider(0.0001, 0.005, 0.0001, 0.00005);
+  slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
   slider.position(20, -50);
-  slider.style("width", "175px");
+  slider.style("width", "300px");
 }
 
 function draw() {
-  if(false) {
-    showTimer();
-  } else if(isRunning_timer) {
-    afterCounting();
+  background(0);
+  noFill();
+  stroke(255);
+  strokeWeight(1);
+  translate(width/2, height/2);
+
+  if(stasio.isAnimated) {
+    stasio.animate();
   } else {
-    background(0);
-    noFill();
-    stroke(255);
-    strokeWeight(1);
-    translate(width/2, height/2);
+    stasio.show();
 
-    if(stasio.isAnimated) {
-      stasio.animate();
-    } else {
-      stasio.show();
-
-      let vol = sound.getLevel();
-      let delta = vol-prev_vol;
-      if(delta < 0) {
-        delta = 0;
-      }
-      sum++;
-      if(delta>slider.value() && sum > 7) {
-        sum = 0;
-        stasio.changePose();
-        stasio.changeDance();
-      }
-      prev_vol = vol;
+    let vol = sound.getLevel();
+    let delta = vol-prev_vol;
+    if(delta < 0) {
+      delta = 0;
     }
-    counter++;
+    sum++;
+    if(delta>0.0051-slider.value() && sum > 7) {
+      sum = 0;
+      stasio.changePose();
+      stasio.changeDance();
+    }
+    prev_vol = vol;
+  }
+  counter++;
+
+  if(show_settings) {
+    showSettings();
   }
 }
 
@@ -70,22 +70,22 @@ function refreshStasio() {
 
 function keyPressed() {
   if(key == ' ') {
-    if(debug_mode) {
-      debug_mode = false;
+    if(show_settings) {
+      show_settings = false;
       slider.position(20, -50);
     } else {
-      debug_mode = true;
+      show_settings = true;
       slider.position(20, 50);
     }
   }
 }
 
-function touchStarted() {
-  if(debug_mode) {
-    debug_mode = false;
+function touchEnded() {
+  if(show_settings) {
+    show_settings = false;
     slider.position(20, -50);
   } else {
-    debug_mode = true;
+    show_settings = true;
     slider.position(20, 50);
   }
 }
