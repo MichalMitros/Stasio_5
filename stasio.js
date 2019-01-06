@@ -2,11 +2,10 @@
 class Stasio {
 
   constructor(dances, scale) {
-    this.present_dance = 0;
-    this.present_pose = 0;
     this.dances = dances;
     this.scale = scale;
-    this.animation_steps = 5;
+    this.present_dance = floor(random(0, this.dances.length));
+    this.present_pose = 0;
     this.prev = undefined;
     this.pres = undefined;
     this.step = 0;
@@ -14,9 +13,9 @@ class Stasio {
   }
 
   changeDance() {
-    
+
     if(random() < 0.05 && counter > 600) {
-      let id = floor(random);
+      let id = this.present_dance;
       if(this.dances.length > 1) {
         while((this.present_dance = floor(random(0, this.dances.length))) === id);
       }
@@ -33,52 +32,52 @@ class Stasio {
       this.present_pose = 0;
     }
     this.pres = this.dances[this.present_dance].poses[this.present_pose];
-    if(this.dances[this.present_dance].isAnimated) {
+    if(this.dances[this.present_dance].isAnimated && animations.checked()) {
       this.isAnimated = true;
     }
   }
 
   animate() {
-    if(this.step < this.animation_steps) {
+    if(this.step < this.dances[this.present_dance].animation_steps) {
 
       let pose = {
-        left_arm_shoulder_x: this.prev.left_arm_shoulder_x + this.step*((this.pres.left_arm_shoulder_x-this.prev.left_arm_shoulder_x)/this.animation_steps),
-        left_arm_shoulder_y: this.prev.left_arm_shoulder_y + this.step*((this.pres.left_arm_shoulder_y-this.prev.left_arm_shoulder_y)/this.animation_steps),
-        left_arm_elbow_x: this.prev.left_arm_elbow_x + this.step*((this.pres.left_arm_elbow_x-this.prev.left_arm_elbow_x)/this.animation_steps),
-        left_arm_elbow_y: this.prev.left_arm_elbow_y + this.step*((this.pres.left_arm_elbow_y-this.prev.left_arm_elbow_y)/this.animation_steps),
-        left_arm_hand_x: this.prev.left_arm_hand_x + this.step*((this.pres.left_arm_hand_x-this.prev.left_arm_hand_x)/this.animation_steps),
-        left_arm_hand_y: this.prev.left_arm_hand_y + this.step*((this.pres.left_arm_hand_y-this.prev.left_arm_hand_y)/this.animation_steps),
-        right_arm_shoulder_x: this.prev.right_arm_shoulder_x + this.step*((this.pres.right_arm_shoulder_x-this.prev.right_arm_shoulder_x)/this.animation_steps),
-        right_arm_shoulder_y: this.prev.right_arm_shoulder_y + this.step*((this.pres.right_arm_shoulder_y-this.prev.right_arm_shoulder_y)/this.animation_steps),
-        right_arm_elbow_x: this.prev.right_arm_elbow_x + this.step*((this.pres.right_arm_elbow_x-this.prev.right_arm_elbow_x)/this.animation_steps),
-        right_arm_elbow_y: this.prev.right_arm_elbow_y + this.step*((this.pres.right_arm_elbow_y-this.prev.right_arm_elbow_y)/this.animation_steps),
-        right_arm_hand_x: this.prev.right_arm_hand_x + this.step*((this.pres.right_arm_hand_x-this.prev.right_arm_hand_x)/this.animation_steps),
-        right_arm_hand_y: this.prev.right_arm_hand_y + this.step*((this.pres.right_arm_hand_y-this.prev.right_arm_hand_y)/this.animation_steps),
-        left_leg_hip_x: this.prev.left_leg_hip_x + this.step*((this.pres.left_leg_hip_x-this.prev.left_leg_hip_x)/this.animation_steps),
-        left_leg_hip_y: this.prev.left_leg_hip_y + this.step*((this.pres.left_leg_hip_y-this.prev.left_leg_hip_y)/this.animation_steps),
-        left_leg_knee_x: this.prev.left_leg_knee_x + this.step*((this.pres.left_leg_knee_x-this.prev.left_leg_knee_x)/this.animation_steps),
-        left_leg_knee_y: this.prev.left_leg_knee_y + this.step*((this.pres.left_leg_knee_y-this.prev.left_leg_knee_y)/this.animation_steps),
-        left_leg_foot_x: this.prev.left_leg_foot_x + this.step*((this.pres.left_leg_foot_x-this.prev.left_leg_foot_x)/this.animation_steps),
-        left_leg_foot_y: this.prev.left_leg_foot_y + this.step*((this.pres.left_leg_foot_y-this.prev.left_leg_foot_y)/this.animation_steps),
-        right_leg_hip_x: this.prev.right_leg_hip_x + this.step*((this.pres.right_leg_hip_x-this.prev.right_leg_hip_x)/this.animation_steps),
-        right_leg_hip_y: this.prev.right_leg_hip_y + this.step*((this.pres.right_leg_hip_y-this.prev.right_leg_hip_y)/this.animation_steps),
-        right_leg_knee_x: this.prev.right_leg_knee_x + this.step*((this.pres.right_leg_knee_x-this.prev.right_leg_knee_x)/this.animation_steps),
-        right_leg_knee_y: this.prev.right_leg_knee_y + this.step*((this.pres.right_leg_knee_y-this.prev.right_leg_knee_y)/this.animation_steps),
-        right_leg_foot_x: this.prev.right_leg_foot_x + this.step*((this.pres.right_leg_foot_x-this.prev.right_leg_foot_x)/this.animation_steps),
-        right_leg_foot_y: this.prev.right_leg_foot_y + this.step*((this.pres.right_leg_foot_y-this.prev.right_leg_foot_y)/this.animation_steps),
-        body_top_x: this.prev.body_top_x + this.step*((this.pres.body_top_x-this.prev.body_top_x)/this.animation_steps),
-        body_top_y: this.prev.body_top_y + this.step*((this.pres.body_top_y-this.prev.body_top_y)/this.animation_steps),
-        body_bottom_x: this.prev.body_bottom_x + this.step*((this.pres.body_bottom_x-this.prev.body_bottom_x)/this.animation_steps),
-        body_bottom_y: this.prev.body_bottom_y + this.step*((this.pres.body_bottom_y-this.prev.body_bottom_y)/this.animation_steps),
-        head_center_x: this.prev.head_center_x + this.step*((this.pres.head_center_x-this.prev.head_center_x)/this.animation_steps),
-        head_center_y: this.prev.head_center_y + this.step*((this.pres.head_center_y-this.prev.head_center_y)/this.animation_steps),
+        left_arm_shoulder_x: this.prev.left_arm_shoulder_x + this.step*((this.pres.left_arm_shoulder_x-this.prev.left_arm_shoulder_x)/this.dances[this.present_dance].animation_steps),
+        left_arm_shoulder_y: this.prev.left_arm_shoulder_y + this.step*((this.pres.left_arm_shoulder_y-this.prev.left_arm_shoulder_y)/this.dances[this.present_dance].animation_steps),
+        left_arm_elbow_x: this.prev.left_arm_elbow_x + this.step*((this.pres.left_arm_elbow_x-this.prev.left_arm_elbow_x)/this.dances[this.present_dance].animation_steps),
+        left_arm_elbow_y: this.prev.left_arm_elbow_y + this.step*((this.pres.left_arm_elbow_y-this.prev.left_arm_elbow_y)/this.dances[this.present_dance].animation_steps),
+        left_arm_hand_x: this.prev.left_arm_hand_x + this.step*((this.pres.left_arm_hand_x-this.prev.left_arm_hand_x)/this.dances[this.present_dance].animation_steps),
+        left_arm_hand_y: this.prev.left_arm_hand_y + this.step*((this.pres.left_arm_hand_y-this.prev.left_arm_hand_y)/this.dances[this.present_dance].animation_steps),
+        right_arm_shoulder_x: this.prev.right_arm_shoulder_x + this.step*((this.pres.right_arm_shoulder_x-this.prev.right_arm_shoulder_x)/this.dances[this.present_dance].animation_steps),
+        right_arm_shoulder_y: this.prev.right_arm_shoulder_y + this.step*((this.pres.right_arm_shoulder_y-this.prev.right_arm_shoulder_y)/this.dances[this.present_dance].animation_steps),
+        right_arm_elbow_x: this.prev.right_arm_elbow_x + this.step*((this.pres.right_arm_elbow_x-this.prev.right_arm_elbow_x)/this.dances[this.present_dance].animation_steps),
+        right_arm_elbow_y: this.prev.right_arm_elbow_y + this.step*((this.pres.right_arm_elbow_y-this.prev.right_arm_elbow_y)/this.dances[this.present_dance].animation_steps),
+        right_arm_hand_x: this.prev.right_arm_hand_x + this.step*((this.pres.right_arm_hand_x-this.prev.right_arm_hand_x)/this.dances[this.present_dance].animation_steps),
+        right_arm_hand_y: this.prev.right_arm_hand_y + this.step*((this.pres.right_arm_hand_y-this.prev.right_arm_hand_y)/this.dances[this.present_dance].animation_steps),
+        left_leg_hip_x: this.prev.left_leg_hip_x + this.step*((this.pres.left_leg_hip_x-this.prev.left_leg_hip_x)/this.dances[this.present_dance].animation_steps),
+        left_leg_hip_y: this.prev.left_leg_hip_y + this.step*((this.pres.left_leg_hip_y-this.prev.left_leg_hip_y)/this.dances[this.present_dance].animation_steps),
+        left_leg_knee_x: this.prev.left_leg_knee_x + this.step*((this.pres.left_leg_knee_x-this.prev.left_leg_knee_x)/this.dances[this.present_dance].animation_steps),
+        left_leg_knee_y: this.prev.left_leg_knee_y + this.step*((this.pres.left_leg_knee_y-this.prev.left_leg_knee_y)/this.dances[this.present_dance].animation_steps),
+        left_leg_foot_x: this.prev.left_leg_foot_x + this.step*((this.pres.left_leg_foot_x-this.prev.left_leg_foot_x)/this.dances[this.present_dance].animation_steps),
+        left_leg_foot_y: this.prev.left_leg_foot_y + this.step*((this.pres.left_leg_foot_y-this.prev.left_leg_foot_y)/this.dances[this.present_dance].animation_steps),
+        right_leg_hip_x: this.prev.right_leg_hip_x + this.step*((this.pres.right_leg_hip_x-this.prev.right_leg_hip_x)/this.dances[this.present_dance].animation_steps),
+        right_leg_hip_y: this.prev.right_leg_hip_y + this.step*((this.pres.right_leg_hip_y-this.prev.right_leg_hip_y)/this.dances[this.present_dance].animation_steps),
+        right_leg_knee_x: this.prev.right_leg_knee_x + this.step*((this.pres.right_leg_knee_x-this.prev.right_leg_knee_x)/this.dances[this.present_dance].animation_steps),
+        right_leg_knee_y: this.prev.right_leg_knee_y + this.step*((this.pres.right_leg_knee_y-this.prev.right_leg_knee_y)/this.dances[this.present_dance].animation_steps),
+        right_leg_foot_x: this.prev.right_leg_foot_x + this.step*((this.pres.right_leg_foot_x-this.prev.right_leg_foot_x)/this.dances[this.present_dance].animation_steps),
+        right_leg_foot_y: this.prev.right_leg_foot_y + this.step*((this.pres.right_leg_foot_y-this.prev.right_leg_foot_y)/this.dances[this.present_dance].animation_steps),
+        body_top_x: this.prev.body_top_x + this.step*((this.pres.body_top_x-this.prev.body_top_x)/this.dances[this.present_dance].animation_steps),
+        body_top_y: this.prev.body_top_y + this.step*((this.pres.body_top_y-this.prev.body_top_y)/this.dances[this.present_dance].animation_steps),
+        body_bottom_x: this.prev.body_bottom_x + this.step*((this.pres.body_bottom_x-this.prev.body_bottom_x)/this.dances[this.present_dance].animation_steps),
+        body_bottom_y: this.prev.body_bottom_y + this.step*((this.pres.body_bottom_y-this.prev.body_bottom_y)/this.dances[this.present_dance].animation_steps),
+        head_center_x: this.prev.head_center_x + this.step*((this.pres.head_center_x-this.prev.head_center_x)/this.dances[this.present_dance].animation_steps),
+        head_center_y: this.prev.head_center_y + this.step*((this.pres.head_center_y-this.prev.head_center_y)/this.dances[this.present_dance].animation_steps),
         eyes: this.prev.eyes,
         smile: this.prev.smile
       };
       this.step++;
       this.show_pose(pose);
     }
-    if(this.step == this.animation_steps) {
+    if(this.step == this.dances[this.present_dance].animation_steps) {
       this.isAnimated = false;
       this.step = 0;
     }

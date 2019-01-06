@@ -4,10 +4,11 @@ var sound;
 var counter;
 var prev_vol;
 var sum;
-var slider;
+var sensitivity_slider;
 var show_settings = false;
 var last_update = "3/1/2019 14:56";
 var version = "5.2_5";
+var animations;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -18,9 +19,11 @@ function setup() {
   counter = 0;
   prev_vol = 0;
   sum = 0;
-  slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
-  slider.position(20, -50);
-  slider.style("width", "300px");
+  sensitivity_slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
+  sensitivity_slider.position(20, -50);
+  sensitivity_slider.style("width", "300px");
+  animations = createCheckbox('', true);
+  animations.position(20, -50);
 }
 
 function draw() {
@@ -41,7 +44,7 @@ function draw() {
       delta = 0;
     }
     sum++;
-    if(delta>0.0051-slider.value() && sum > 7) {
+    if(delta>0.0051-sensitivity_slider.value() && sum > 7) {
       sum = 0;
       stasio.changePose();
       stasio.changeDance();
@@ -65,17 +68,23 @@ function windowResized() {
 
 function refreshStasio() {
   scl = windowHeight/16.5;
+  let pose = stasio.present_pose;
+  let dance = stasio.present_dance;
   stasio = new Stasio(createDances(), scl);
+  stasio.present_dance = dance;
+  stasio.present_pose = pose;
 }
 
 function keyPressed() {
   if(key == ' ') {
     if(show_settings) {
       show_settings = false;
-      slider.position(20, -50);
+      sensitivity_slider.position(20, -50);
+      animations.position(20, -50);
     } else {
       show_settings = true;
-      slider.position(20, 50);
+      sensitivity_slider.position(20, 50);
+      animations.position(35, 100);
     }
   }
 }
@@ -83,9 +92,11 @@ function keyPressed() {
 function touchEnded() {
   if(show_settings) {
     show_settings = false;
-    slider.position(20, -50);
+    sensitivity_slider.position(20, -50);
+    animations.position(20, -50);
   } else {
     show_settings = true;
-    slider.position(20, 50);
+    sensitivity_slider.position(20, 50);
+    animations.position(35, 100);
   }
 }
