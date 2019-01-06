@@ -6,7 +6,7 @@ function createDances() {
   dances.push({
     poses: [],
     isAnimated: true,
-    animation_steps: 4
+    animation_steps: 5
   });
   dances[0].poses.push({
     left_arm_shoulder_x: 0,
@@ -188,7 +188,7 @@ function createDances() {
   dances.push({
     poses: [],
     isAnimated: true,
-    animation_steps: 4
+    animation_steps: 5
   });
   dances[2].poses.push({
     left_arm_shoulder_x: 0,
@@ -279,7 +279,7 @@ function createDances() {
   dances.push({
     poses: [],
     isAnimated: true,
-    animation_steps: 4
+    animation_steps: 6
   });
   dances[3].poses.push({
     left_arm_shoulder_x: 0,
@@ -370,7 +370,7 @@ function createDances() {
   dances.push({
     poses: [],
     isAnimated: true,
-    animation_steps: 4
+    animation_steps: 5
   });
   dances[4].poses.push({
     left_arm_shoulder_x: 0,
@@ -705,7 +705,7 @@ function createDances() {
   dances.push({
     poses: [],
     isAnimated: true,
-    animation_steps: 4
+    animation_steps: 5
   });
   dances[5].poses.push({
     left_arm_shoulder_x: 0,

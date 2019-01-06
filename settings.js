@@ -5,12 +5,21 @@ function showSettings() {
   stroke(255);
   strokeWeight(1);
   translate(-width/2, -height/2);
-  text("Sensitivity: "+floor(map(slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
+  text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
+  text("animations", 65, 118);
 
   textSize(14);
-  text("dance_id: "+stasio.present_dance, 40, 200);
-  text("pose_id: "+stasio.present_pose, 40, 225);
-  text("dance_animations: "+stasio.dances[stasio.present_dance].isAnimated, 40, 250);
+  text("dance_id: "+stasio.present_dance, 40, 240);
+  text("pose_id: "+stasio.present_pose, 40, 265);
+  if(animations.checked()) {
+    text("dance_animations: "+stasio.dances[stasio.present_dance].isAnimated, 40, 290);
+    if(stasio.dances[stasio.present_dance].isAnimated) {
+      text("dance_smoothness: "+stasio.dances[stasio.present_dance].animation_steps, 40, 315);
+    }
+  } else {
+    text("dance_animations: false", 40, 290);
+  }
+
 
   textSize(20);
   text("Last update: "+last_update, 37, height-60);
