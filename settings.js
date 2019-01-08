@@ -7,6 +7,7 @@ function showSettings() {
   translate(-width/2, -height/2);
   text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
   text("animations", 65, 118);
+  text("changing dances", 65, 168);
 
   textSize(14);
   text("dance_id: "+stasio.present_dance, 40, 240);
