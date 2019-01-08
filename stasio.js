@@ -13,15 +13,16 @@ class Stasio {
   }
 
   changeDance() {
+    if(changeDances.checked()) {
+      if(random() < 0.05 && counter > 600) {
+        let id = this.present_dance;
+        if(this.dances.length > 1) {
+          while((this.present_dance = floor(random(0, this.dances.length))) === id);
+        }
 
-    if(random() < 0.05 && counter > 600) {
-      let id = this.present_dance;
-      if(this.dances.length > 1) {
-        while((this.present_dance = floor(random(0, this.dances.length))) === id);
+        this.present_pose = 0;
+        counter = 0;
       }
-
-      this.present_pose = 0;
-      counter = 0;
     }
   }
 

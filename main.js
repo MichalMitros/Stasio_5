@@ -6,9 +6,10 @@ var prev_vol;
 var sum;
 var sensitivity_slider;
 var show_settings = false;
-var last_update = "3/1/2019 14:56";
-var version = "5.2_5";
+var last_update = "8/1/2019 22:47";
+var version = "5.2_8";
 var animations;
+var changeDances;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,6 +25,8 @@ function setup() {
   sensitivity_slider.style("width", "300px");
   animations = createCheckbox('', true);
   animations.position(20, -50);
+  changeDances = createCheckbox('', true);
+  changeDances.position(20, -50);
 }
 
 function draw() {
@@ -81,10 +84,12 @@ function keyPressed() {
       show_settings = false;
       sensitivity_slider.position(20, -50);
       animations.position(20, -50);
+      changeDances.position(20, -50);
     } else {
       show_settings = true;
       sensitivity_slider.position(20, 50);
       animations.position(35, 100);
+      changeDances.position(35, 150);
     }
   }
 }
@@ -94,9 +99,11 @@ function touchEnded() {
     show_settings = false;
     sensitivity_slider.position(20, -50);
     animations.position(20, -50);
+    changeDances.position(20, -50);
   } else {
     show_settings = true;
     sensitivity_slider.position(20, 50);
     animations.position(35, 100);
+    changeDances.position(35, 150);
   }
 }
