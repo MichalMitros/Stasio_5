@@ -6,8 +6,8 @@ var prev_vol;
 var sum;
 var sensitivity_slider;
 var show_settings = false;
-var last_update = "8/1/2019 22:54";
-var version = "5.2_8";
+var last_update = "24/1/2019 12:24";
+var version = "5.2_9";
 var animations;
 var changeDances;
 

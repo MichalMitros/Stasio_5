@@ -4,7 +4,7 @@ class Stasio {
   constructor(dances, scale) {
     this.dances = dances;
     this.scale = scale;
-    this.present_dance = floor(random(0, this.dances.length));
+    this.present_dance = 1;//floor(random(0, this.dances.length));
     this.present_pose = 0;
     this.prev = undefined;
     this.pres = undefined;
@@ -119,8 +119,16 @@ class Stasio {
             this.scale*4, this.scale*4);
 
     // FACE
-    pose.smile(this.scale);
-    pose.eyes(this.scale);
+    if(pose.smile !== undefined) {
+      pose.smile(this.scale, pose.head_center_x, pose.head_center_y);
+    } else {
+      this.default_smile(this.scale, pose.head_center_x, pose.head_center_y);
+    }
+    if(pose.eyes !== undefined) {
+      pose.eyes(this.scale, pose.head_center_x, pose.head_center_y);
+    } else {
+      this.default_eyes(this.scale, pose.head_center_x, pose.head_center_y);
+    }
   }
 
   show_pose(pose) {
@@ -155,7 +163,28 @@ class Stasio {
             this.scale*4, this.scale*4);
 
     // FACE
-    pose.smile(this.scale);
-    pose.eyes(this.scale);
+    if(pose.smile !== undefined) {
+      pose.smile(this.scale, pose.head_center_x, pose.head_center_y);
+    } else {
+      this.default_smile(this.scale, pose.head_center_x, pose.head_center_y);
+    }
+    if(pose.eyes !== undefined) {
+      pose.eyes(this.scale, pose.head_center_x, pose.head_center_y);
+    } else {
+      this.default_eyes(this.scale, pose.head_center_x, pose.head_center_y);
+    }
+
+  }
+
+  default_smile(scale, head_center_x, head_center_y) {
+    strokeWeight(scl/13);
+    line((head_center_x-0.5)*scl, (head_center_y+0.75)*scl, head_center_x, (head_center_y+1.25)*scl);
+    line(head_center_x, (head_center_y+1.25)*scl, (head_center_x+0.5)*scl, (head_center_y+0.75)*scl);
+  }
+
+  default_eyes(scale, head_center_x, head_center_y) {
+    strokeWeight(scl/6);
+    point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+    point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
   }
 }

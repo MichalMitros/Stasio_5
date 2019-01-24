@@ -28,10 +28,10 @@ function showSettings() {
 
   var _fps = round(frameRate()/10);
   _fps *= 10;
-  if(_fps > 40) {
+  if(_fps >= 40) {
     fill(0, 255, 0);
     stroke(0, 255, 0);
-  } else if(_fps > 30) {
+  } else if(_fps >= 30) {
     fill(255, 255, 0);
     stroke(255, 255, 0);
   } else {
