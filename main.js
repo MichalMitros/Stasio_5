@@ -6,8 +6,8 @@ var prev_vol;
 var sum;
 var sensitivity_slider;
 var show_settings = false;
-var last_update = "24/1/2019 12:24";
-var version = "5.2_9";
+var last_update = "28/1/2019 23:07";
+var version = "5.3";
 var animations;
 var changeDances;
 
@@ -31,10 +31,34 @@ function setup() {
 
 function draw() {
   background(0);
+
+  if(frameCount < 600) {
+    noStroke();
+    fill(225);
+    if(height < width) {
+      textSize(height/50);
+    } else {
+      textSize(width/50);
+    }
+    text("Move cursor to the edge and", 50, height/2-100);
+    text("click to open settings! :D", 50, height/2-75);
+    stroke(255);
+    noFill();
+    strokeWeight(2);
+    arc(80, height/2-50, 80, 80, 0, HALF_PI);
+    line(80, height/2-10, 90, height/2);
+    line(80, height/2-10, 90, height/2-20);
+  }
+
   noFill();
   stroke(255);
   strokeWeight(1);
-  translate(width/2, height/2);
+  if(show_settings) {
+    translate(width/2+180, height/2);
+  } else {
+    translate(width/2, height/2);
+  }
+
 
   if(stasio.isAnimated) {
     stasio.animate();
@@ -47,7 +71,7 @@ function draw() {
       delta = 0;
     }
     sum++;
-    if(delta>0.0051-sensitivity_slider.value() && sum > 7) {
+    if(stasio.getMultiplier()*delta>0.0051-sensitivity_slider.value() && sum > 7) {
       sum = 0;
       stasio.changePose();
       stasio.changeDance();
@@ -57,7 +81,21 @@ function draw() {
   counter++;
 
   if(show_settings) {
+    translate(-width/2-180, -height/2);
+  } else {
+    translate(-width/2, -height/2);
+  }
+  if(show_settings) {
     showSettings();
+  } else if(mouseX < 64 && mouseX >= 0 &&
+            mouseY >= height/4 && mouseY <= height-height/4) {
+    noStroke();
+    fill(32);
+    rect(-5, height/4, 29, height/2, 5);
+    stroke(128);
+    strokeWeight(2);
+    line(6, height/2-12, 18, height/2);
+    line(6, height/2+12, 18, height/2);
   }
 }
 
@@ -94,13 +132,13 @@ function keyPressed() {
   }
 }
 
-function touchEnded() {
-  if(show_settings) {
+function mousePressed() {
+  if(show_settings && mouseX >= 360 && mouseY >= 0 && mouseY <= height) {
     show_settings = false;
     sensitivity_slider.position(20, -50);
     animations.position(20, -50);
     changeDances.position(20, -50);
-  } else {
+  } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
     sensitivity_slider.position(20, 50);
     animations.position(35, 100);
