@@ -4,7 +4,7 @@ class Stasio {
   constructor(dances, scale) {
     this.dances = dances;
     this.scale = scale;
-    this.present_dance = 1;//floor(random(0, this.dances.length));
+    this.present_dance = floor(random(0, this.dances.length));
     this.present_pose = 0;
     this.prev = undefined;
     this.pres = undefined;
@@ -13,14 +13,19 @@ class Stasio {
   }
 
   changeDance() {
-    if(changeDances.checked()) {
+    if(!changeDances.checked()) {
       if(random() < 0.05 && counter > 600) {
+        this.prev = this.dances[this.present_dance].poses[this.present_pose];
         let id = this.present_dance;
         if(this.dances.length > 1) {
           while((this.present_dance = floor(random(0, this.dances.length))) === id);
         }
 
         this.present_pose = 0;
+        this.pres = this.dances[this.present_dance].poses[this.present_pose];
+        if(this.dances[this.present_dance].isAnimated && animations.checked()) {
+          this.isAnimated = true;
+        }
         counter = 0;
       }
     }
@@ -36,6 +41,13 @@ class Stasio {
     if(this.dances[this.present_dance].isAnimated && animations.checked()) {
       this.isAnimated = true;
     }
+  }
+
+  getMultiplier() {
+    if(this.dances[this.present_dance].multiplier !== undefined) {
+      return this.dances[this.present_dance].multiplier;
+    }
+    return 1;
   }
 
   animate() {
