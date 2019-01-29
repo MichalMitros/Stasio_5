@@ -13,7 +13,7 @@ function showSettings() {
   line(366, height/2, 378, height/2-12);
   line(366, height/2, 378, height/2+12);
   fill(255);
-  stroke(255);
+  noStroke();
   strokeWeight(1);
   text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
   text("animations", 65, 118);
