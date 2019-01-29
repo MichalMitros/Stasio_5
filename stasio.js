@@ -13,7 +13,7 @@ class Stasio {
   }
 
   changeDance() {
-    if(!changeDances.checked()) {
+    if(changeDances.checked()) {
       if(random() < 0.05 && counter > 600) {
         this.prev = this.dances[this.present_dance].poses[this.present_pose];
         let id = this.present_dance;
