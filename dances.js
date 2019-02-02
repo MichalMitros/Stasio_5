@@ -39,16 +39,6 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
-    smile: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/13);
-      line(-0.5*scl, -4.25*scl, 0*scl, -3.75*scl);
-      line(0*scl, -3.75*scl, 0.5*scl, -4.25*scl);
-    }
   });
   dances[0].poses.push({
     left_arm_shoulder_x: 0,
@@ -81,16 +71,6 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
-    smile: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/13);
-      line(-0.5*scl, -4.25*scl, 0*scl, -3.75*scl);
-      line(0*scl, -3.75*scl, 0.5*scl, -4.25*scl);
-    }
   });
 
   // SECOND CLASSIC DANCE
@@ -203,13 +183,15 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4.15*scl, -0.25*scl, -3.8*scl);
-      line(-0.25*scl, -3.8*scl, 0.5*scl, -4.15*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+0.85)*scl,
+           (head_center_x-0.25)*scl, (head_center_y+1.2)*scl);
+      line((head_center_x-0.25)*scl, (head_center_y+1.2)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+0.85)*scl);
     }
   });
   dances[2].poses.push({
@@ -245,13 +227,15 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4.15*scl, -0.25*scl, -3.8*scl);
-      line(-0.25*scl, -3.8*scl, 0.5*scl, -4.15*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+0.85)*scl,
+           (head_center_x-0.25)*scl, (head_center_y+1.2)*scl);
+      line((head_center_x-0.25)*scl, (head_center_y+1.2)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+0.85)*scl);
     }
   });
 
@@ -292,15 +276,10 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(-0.25*scl, -4*scl, 0.5*scl, 0.5*scl, 0, PI);
-      arc(0.25*scl, -4*scl, 0.5*scl, 0.5*scl, 0, PI);
+      arc((head_center_x-0.25)*scl, (head_center_y+1)*scl, 0.5*scl, 0.5*scl, 0, PI);
+      arc((head_center_x+0.25)*scl, (head_center_y+1)*scl, 0.5*scl, 0.5*scl, 0, PI);
     }
   });
   dances[3].poses.push({
@@ -334,15 +313,10 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(-0.25*scl, -4*scl, 0.5*scl, 0.5*scl, 0, PI);
-      arc(0.25*scl, -4*scl, 0.5*scl, 0.5*scl, 0, PI);
+      arc((head_center_x-0.25)*scl, (head_center_y+1)*scl, 0.5*scl, 0.5*scl, 0, PI);
+      arc((head_center_x+0.25)*scl, (head_center_y+1)*scl, 0.5*scl, 0.5*scl, 0, PI);
     }
   });
 
@@ -383,14 +357,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -424,14 +393,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -465,14 +429,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -506,14 +465,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -547,14 +501,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -588,14 +537,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -629,14 +573,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
   dances[4].poses.push({
@@ -670,14 +609,9 @@ function createDances() {
     body_bottom_y: 4,
     head_center_x: 0,
     head_center_y: -5,
-    eyes: function(scl, head_center_x, head_center_y) {
-      strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
-    },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      arc(0, -4.75*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
+      arc(head_center_x, (0.25+head_center_y)*scl, 2*scl, 2*scl, PI/3, PI-PI/3);
     }
   });
 
@@ -720,12 +654,13 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4*scl, 0.5*scl, -4*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+1)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+1)*scl);
     }
   });
   dances[5].poses.push({
@@ -761,12 +696,13 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4*scl, 0.5*scl, -4*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+1)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+1)*scl);
     }
   });
   dances[5].poses.push({
@@ -802,12 +738,13 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4*scl, 0.5*scl, -4*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+1)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+1)*scl);
     }
   });
   dances[5].poses.push({
@@ -843,12 +780,13 @@ function createDances() {
     head_center_y: -5,
     eyes: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/6);
-      point(-0.9*scl, -5.5*scl);
-      point(0.9*scl, -5.5*scl);
+      point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+      point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
     },
     smile: function(scl, head_center_x, head_center_y) {
       strokeWeight(scl/13);
-      line(-0.5*scl, -4*scl, 0.5*scl, -4*scl);
+      line((head_center_x-0.5)*scl, (head_center_y+1)*scl,
+           (head_center_x+0.5)*scl, (head_center_y+1)*scl);
     }
   });
 
@@ -1053,13 +991,15 @@ function createDances() {
       head_center_y: -5,
       eyes: function(scl, head_center_x, head_center_y) {
         strokeWeight(scl/6);
-        point(-0.9*scl, -5.5*scl);
-        point(0.9*scl, -5.5*scl);
+        point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+        point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
       },
       smile: function(scl, head_center_x, head_center_y) {
         strokeWeight(scl/13);
-        line(-0.5*scl, -4.15*scl, -0.25*scl, -3.8*scl);
-        line(-0.25*scl, -3.8*scl, 0.5*scl, -4.15*scl);
+        line((head_center_x-0.5)*scl, (head_center_y+0.85)*scl,
+             (head_center_x-0.25)*scl, (head_center_y+1.2)*scl);
+        line((head_center_x-0.25)*scl, (head_center_y+1.2)*scl,
+             (head_center_x+0.5)*scl, (head_center_y+0.85)*scl);
       }
     }, {
       left_arm_shoulder_x: 0,
@@ -1094,13 +1034,15 @@ function createDances() {
       head_center_y: -5,
       eyes: function(scl, head_center_x, head_center_y) {
         strokeWeight(scl/6);
-        point(-0.9*scl, -5.5*scl);
-        point(0.9*scl, -5.5*scl);
+        point((head_center_x-0.9)*scl, (head_center_y-0.5)*scl);
+        point((head_center_x+0.9)*scl, (head_center_y-0.5)*scl);
       },
       smile: function(scl, head_center_x, head_center_y) {
         strokeWeight(scl/13);
-        line(-0.5*scl, -4.15*scl, -0.25*scl, -3.8*scl);
-        line(-0.25*scl, -3.8*scl, 0.5*scl, -4.15*scl);
+        line((head_center_x-0.5)*scl, (head_center_y+0.85)*scl,
+             (head_center_x-0.25)*scl, (head_center_y+1.2)*scl);
+        line((head_center_x-0.25)*scl, (head_center_y+1.2)*scl,
+             (head_center_x+0.5)*scl, (head_center_y+0.85)*scl);
       }
     }],
     isAnimated: true,
