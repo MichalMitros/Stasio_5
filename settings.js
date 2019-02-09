@@ -1,3 +1,4 @@
+var _fps = 60;
 
 function showSettings() {
   textSize(20);
@@ -38,8 +39,9 @@ function showSettings() {
   text("Last update: "+last_update, 37, height-60);
   text("Version: "+version, 37, height-30);
 
-  var _fps = round(frameRate()/10);
-  _fps *= 10;
+  if(frameCount%30 == 0) {
+    _fps = round(frameRate());
+  }
   if(_fps >= 40) {
     fill(0, 255, 0);
     stroke(0, 255, 0);
