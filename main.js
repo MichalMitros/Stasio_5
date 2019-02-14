@@ -6,10 +6,12 @@ var prev_vol;
 var sum;
 var sensitivity_slider;
 var show_settings = false;
-var last_update = "2/2/2019 13:21";
-var version = "5.3_2";
+var last_update = "14/2/2019 9:59";
+var version = "5.3_3";
 var animations;
 var changeDances;
+var tip_text_brightness = 255;
+var tips_time = 600;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -32,22 +34,21 @@ function setup() {
 function draw() {
   background(0);
 
-  if(frameCount < 600) {
-    noStroke();
-    fill(225);
-    if(height < width) {
-      textSize(height/50);
-    } else {
-      textSize(width/50);
+  if(tips_time >= 0) {
+    if(tips_time < 256) {
+      tip_text_brightness--;
     }
-    text("Move cursor to the edge and", 50, height/2-100);
-    text("click to open settings! :D", 50, height/2-75);
-    stroke(255);
-    noFill();
-    strokeWeight(2);
-    arc(80, height/2-50, 80, 80, 0, HALF_PI);
-    line(80, height/2-10, 90, height/2);
-    line(80, height/2-10, 90, height/2-20);
+    if(height < width) {
+      textSize(height/40);
+    } else {
+      textSize(width/40);
+    }
+    stroke(0);
+    fill(tip_text_brightness);
+    textAlign(RIGHT);
+    text("Press F to turn on/off fullscreen mode", width-30, height-30);
+    textAlign(LEFT);
+    tips_time--;
   }
 
   noFill();
@@ -88,7 +89,7 @@ function draw() {
   if(show_settings) {
     showSettings();
   } else if(mouseX < 64 && mouseX >= 0 &&
-            mouseY >= height/4 && mouseY <= height-height/4) {
+            mouseY >= height/4 && mouseY <= height-height/4 && focused) {
     noStroke();
     fill(32);
     rect(-5, height/4, 29, height/2, 5);
@@ -97,10 +98,19 @@ function draw() {
     line(6, height/2-12, 18, height/2);
     line(6, height/2+12, 18, height/2);
   }
+
+  // fill(15, 15, 60);
+  // noStroke();
+  // textSize(50);
+  // text("TEST VERSION", width-400, 70);
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  if(!fullscreen()) {
+    resizeCanvas(windowWidth, windowHeight);
+  } else {
+    resizeCanvas(displayWidth, displayHeight);
+  }
   sum = 0;
   counter = 0;
   prev_vol = 0;
@@ -129,6 +139,16 @@ function keyPressed() {
       animations.position(35, 100);
       changeDances.position(35, 150);
     }
+  }
+  if(key == 'f') {
+    var fs = fullscreen();
+    fullscreen(!fs);
+    windowResized();
+    if(!fs) {
+      tips_time = 600;
+      tip_text_brightness = 255;
+    }
+    redraw();
   }
 }
 
