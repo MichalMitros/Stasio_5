@@ -6,8 +6,8 @@ var prev_vol;
 var sum;
 var sensitivity_slider;
 var show_settings = false;
-var last_update = "14/2/2019 9:59";
-var version = "5.3_3";
+var last_update = "23/2/2019 20:23";
+var version = "5.3_4";
 var animations;
 var changeDances;
 var tip_text_brightness = 255;
@@ -72,7 +72,8 @@ function draw() {
       delta = 0;
     }
     sum++;
-    if(stasio.getMultiplier()*delta>0.0051-sensitivity_slider.value() && sum > 7) {
+    if((stasio.getMultiplier()*delta>0.0051-sensitivity_slider.value() && sum > 7)
+        || stasio.dances[stasio.present_dance].poses[stasio.present_pose].isTransitional === true) {
       sum = 0;
       stasio.changePose();
       stasio.changeDance();
