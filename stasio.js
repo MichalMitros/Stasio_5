@@ -15,37 +15,35 @@ class Stasio {
   }
 
   changeDance() {
-    if(changeDances.checked()) {
-      if(random() < 0.05 && counter > 600) {
-        this.prev = this.dances[this.present_dance].poses[this.present_pose];
-        if(this.dances.length > 6) {
-          let possible_dances = [];
-          for(let i=0; i<this.dances.length; i++) {
-            if(!this.dance_history.includes(i)) {
-              possible_dances.push(i);
-            }
+    if(random() < dance_frequency_slider.value() && counter > 600) {
+      this.prev = this.dances[this.present_dance].poses[this.present_pose];
+      if(this.dances.length > 6) {
+        let possible_dances = [];
+        for(let i=0; i<this.dances.length; i++) {
+          if(!this.dance_history.includes(i)) {
+            possible_dances.push(i);
           }
-          this.present_dance = random(possible_dances);
-          // while(this.dance_history.includes(this.present_dance)) {
-          //   this.present_dance = floor(random(0, this.dances.length));
-          // }
-        } else if(dances.length > 1) {
-          let id = this.present_dance;
-          while((this.present_dance = floor(random(0, this.dances.length))) === id);
         }
-
-        if(this.dance_history.length > 3) {
-          this.dance_history.splice(0, 1);
-        }
-        this.dance_history.push(this.present_dance);
-
-        this.present_pose = 0;
-        this.pres = this.dances[this.present_dance].poses[this.present_pose];
-        if(this.dances[this.present_dance].isAnimated && animations.checked()) {
-          this.isAnimated = true;
-        }
-        counter = 0;
+        this.present_dance = random(possible_dances);
+        // while(this.dance_history.includes(this.present_dance)) {
+        //   this.present_dance = floor(random(0, this.dances.length));
+        // }
+      } else if(dances.length > 1) {
+        let id = this.present_dance;
+        while((this.present_dance = floor(random(0, this.dances.length))) === id);
       }
+
+      if(this.dance_history.length > 3) {
+        this.dance_history.splice(0, 1);
+      }
+      this.dance_history.push(this.present_dance);
+
+      this.present_pose = 0;
+      this.pres = this.dances[this.present_dance].poses[this.present_pose];
+      if(this.dances[this.present_dance].isAnimated && animations.checked()) {
+        this.isAnimated = true;
+      }
+      counter = 0;
     }
   }
 

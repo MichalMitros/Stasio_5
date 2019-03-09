@@ -17,8 +17,21 @@ function showSettings() {
   noStroke();
   strokeWeight(1);
   text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
-  text("animations", 65, 118);
-  text("changing dances", 65, 168);
+  let freq_text = "";
+  let freq = dance_frequency_slider.value();
+  if(freq > 0.1) {
+    freq_text = "very often";
+  } else if(freq > 0.075) {
+    freq_text = "often";
+  } else if(freq > 0.045) {
+    freq_text = "normally";
+  } else if(freq > 0.022) {
+    freq_text = "rarely";
+  } else {
+    freq_text = "never";
+  }
+  text("Change dance: " + freq_text, 37, 100);
+  text("animations", 65, 168);
 
   if(height > 420) {
     textSize(14);

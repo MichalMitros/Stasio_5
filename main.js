@@ -5,11 +5,11 @@ var counter;
 var prev_vol;
 var sum;
 var sensitivity_slider;
+var dance_frequency_slider;
 var show_settings = false;
-var last_update = "23/2/2019 20:23";
-var version = "5.3_4";
+var last_update = "9/3/2019 12:25";
+var version = "5.3_5";
 var animations;
-var changeDances;
 var tip_text_brightness = 255;
 var tips_time = 600;
 
@@ -25,10 +25,11 @@ function setup() {
   sensitivity_slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
   sensitivity_slider.position(20, -50);
   sensitivity_slider.style("width", "300px");
+  dance_frequency_slider = createSlider(-0.002, 0.102, 0.05, 0.026);
+  dance_frequency_slider.position(20, -50);
+  dance_frequency_slider.style("width", "300px");
   animations = createCheckbox('', true);
   animations.position(20, -50);
-  changeDances = createCheckbox('', true);
-  changeDances.position(20, -50);
 }
 
 function draw() {
@@ -132,13 +133,13 @@ function keyPressed() {
     if(show_settings) {
       show_settings = false;
       sensitivity_slider.position(20, -50);
+      dance_frequency_slider.position(20, -50);
       animations.position(20, -50);
-      changeDances.position(20, -50);
     } else {
       show_settings = true;
       sensitivity_slider.position(20, 50);
-      animations.position(35, 100);
-      changeDances.position(35, 150);
+      dance_frequency_slider.position(20, 110);
+      animations.position(35, 150);
     }
   }
   if(key == 'f') {
@@ -157,12 +158,12 @@ function mousePressed() {
   if(show_settings && mouseX >= 360 && mouseY >= 0 && mouseY <= height) {
     show_settings = false;
     sensitivity_slider.position(20, -50);
+    dance_frequency_slider.position(20, -50);
     animations.position(20, -50);
-    changeDances.position(20, -50);
   } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
     sensitivity_slider.position(20, 50);
-    animations.position(35, 100);
-    changeDances.position(35, 150);
+    dance_frequency_slider.position(20, 110);
+    animations.position(35, 150);
   }
 }
