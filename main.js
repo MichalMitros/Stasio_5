@@ -7,7 +7,7 @@ var sum;
 var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
-var last_update = "9/3/2019 10:7";
+var last_update = "9/3/2019 12:25";
 var version = "5.3_5";
 var animations;
 var tip_text_brightness = 255;
