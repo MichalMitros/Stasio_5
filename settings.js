@@ -31,26 +31,21 @@ function showSettings() {
     freq_text = "never";
   }
   text("Change dance: " + freq_text, 37, 100);
-  text("animations", 65, 168);
 
-  if(height > 420) {
-    textSize(14);
-    text("dance_id: "+stasio.present_dance, 40, 240);
-    text("pose_id: "+stasio.present_pose, 40, 265);
-    if(animations.checked()) {
-      text("dance_animations: "+stasio.dances[stasio.present_dance].isAnimated, 40, 290);
-      if(stasio.dances[stasio.present_dance].isAnimated) {
-        text("dance_smoothness: "+stasio.dances[stasio.present_dance].animation_steps, 40, 315);
-      }
-    } else {
-      text("dance_animations: false", 40, 290);
-    }
-  }
+  // if(height > 420) {
+  //   textSize(14);
+  //   text("dance_id: "+stasio.present_dance, 40, 240);
+  //   text("pose_id: "+stasio.present_pose, 40, 265);
+  //   text("dance_animations: "+stasio.dances[stasio.present_dance].isAnimated, 40, 290);
+  //   if(stasio.dances[stasio.present_dance].isAnimated) {
+  //     text("dance_smoothness: "+stasio.dances[stasio.present_dance].animation_steps, 40, 315);
+  //   }
+  // }
 
 
   textSize(20);
-  text("Last update: "+last_update, 37, height-60);
-  text("Version: "+version, 37, height-30);
+  text("Last update: "+last_update, 20, height-60);
+  text("Version: "+version, 20, height-30);
 
   if(frameCount%30 == 0) {
     _fps = round(frameRate());

@@ -7,10 +7,11 @@ var sum;
 var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
-var last_update = "9/3/2019 12:25";
-var version = "5.3_5";
-var animations;
+var last_update = "17/3/2019 16:52";
+var version = "5.3_6";
 var tip_text_brightness = 255;
+var facebook_button;
+var github_button;
 var tips_time = 600;
 
 function setup() {
@@ -24,12 +25,16 @@ function setup() {
   sum = 0;
   sensitivity_slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
   sensitivity_slider.position(20, -50);
-  sensitivity_slider.style("width", "300px");
+  sensitivity_slider.class("slider");
   dance_frequency_slider = createSlider(-0.002, 0.102, 0.05, 0.026);
   dance_frequency_slider.position(20, -50);
-  dance_frequency_slider.style("width", "300px");
-  animations = createCheckbox('', true);
-  animations.position(20, -50);
+  dance_frequency_slider.class("slider");
+  facebook_button = createA('https://www.facebook.com/Stasio-Project-2080663728643430/' , 'Facebook', '_blank');
+  facebook_button.class('facebook');
+  facebook_button.position(20, -50);
+  github_button = createA('https://github.com/MichalMitros/Stasio_5' , 'Github', '_blank');
+  github_button.class('github');
+  github_button.position(20, -50);
 }
 
 function draw() {
@@ -134,12 +139,14 @@ function keyPressed() {
       show_settings = false;
       sensitivity_slider.position(20, -50);
       dance_frequency_slider.position(20, -50);
-      animations.position(20, -50);
+      facebook_button.position(20, -50);
+      github_button.position(20, -50);
     } else {
       show_settings = true;
       sensitivity_slider.position(20, 50);
       dance_frequency_slider.position(20, 110);
-      animations.position(35, 150);
+      facebook_button.position(180, height - 130);
+      github_button.position(20, height - 130);
     }
   }
   if(key == 'f') {
@@ -159,11 +166,13 @@ function mousePressed() {
     show_settings = false;
     sensitivity_slider.position(20, -50);
     dance_frequency_slider.position(20, -50);
-    animations.position(20, -50);
+    facebook_button.position(20, -50);
+    github_button.position(20, -50);
   } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
     sensitivity_slider.position(20, 50);
     dance_frequency_slider.position(20, 110);
-    animations.position(35, 150);
+    facebook_button.position(180, height - 130);
+    github_button.position(20, height - 130);
   }
 }

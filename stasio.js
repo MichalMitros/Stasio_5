@@ -40,7 +40,7 @@ class Stasio {
 
       this.present_pose = 0;
       this.pres = this.dances[this.present_dance].poses[this.present_pose];
-      if(this.dances[this.present_dance].isAnimated && animations.checked()) {
+      if(this.dances[this.present_dance].isAnimated) {
         this.isAnimated = true;
       }
       counter = 0;
@@ -54,7 +54,7 @@ class Stasio {
       this.present_pose = 0;
     }
     this.pres = this.dances[this.present_dance].poses[this.present_pose];
-    if(this.dances[this.present_dance].isAnimated && animations.checked()) {
+    if(this.dances[this.present_dance].isAnimated) {
       this.isAnimated = true;
     }
   }
