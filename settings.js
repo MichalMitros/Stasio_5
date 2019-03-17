@@ -44,8 +44,8 @@ function showSettings() {
 
 
   textSize(20);
-  text("Last update: "+last_update, 37, height-60);
-  text("Version: "+version, 37, height-30);
+  text("Last update: "+last_update, 20, height-60);
+  text("Version: "+version, 20, height-30);
 
   if(frameCount%30 == 0) {
     _fps = round(frameRate());
