@@ -7,11 +7,12 @@ var sum;
 var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
-var last_update = "17/3/2019 16:52";
-var version = "5.3_6";
+var last_update = "22/3/2019 17:52";
+var version = "5.3_7";
 var tip_text_brightness = 255;
 var facebook_button;
 var github_button;
+var change_dance_button;
 var tips_time = 600;
 
 function setup() {
@@ -35,6 +36,10 @@ function setup() {
   github_button = createA('https://github.com/MichalMitros/Stasio_5' , 'Github', '_blank');
   github_button.class('github');
   github_button.position(20, -50);
+  change_dance_button = createButton('Next dance');
+  change_dance_button.class('nextdance');
+  change_dance_button.position(20, -50);
+  change_dance_button.mousePressed(nextDance);
 }
 
 function draw() {
@@ -141,12 +146,14 @@ function keyPressed() {
       dance_frequency_slider.position(20, -50);
       facebook_button.position(20, -50);
       github_button.position(20, -50);
+      change_dance_button.position(20, -50);
     } else {
       show_settings = true;
       sensitivity_slider.position(20, 50);
       dance_frequency_slider.position(20, 110);
       facebook_button.position(180, height - 130);
       github_button.position(20, height - 130);
+      change_dance_button.position(180, 145);
     }
   }
   if(key == 'f') {
@@ -168,11 +175,17 @@ function mousePressed() {
     dance_frequency_slider.position(20, -50);
     facebook_button.position(20, -50);
     github_button.position(20, -50);
+    change_dance_button.position(20, -50);
   } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
     sensitivity_slider.position(20, 50);
     dance_frequency_slider.position(20, 110);
     facebook_button.position(180, height - 130);
     github_button.position(20, height - 130);
+    change_dance_button.position(180, 145);
   }
+}
+
+function nextDance() {
+  stasio.nextDance();
 }
