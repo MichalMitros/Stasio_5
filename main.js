@@ -7,13 +7,15 @@ var sum;
 var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
-var last_update = "22/3/2019 17:52";
-var version = "5.3_7";
+var last_update = "2/4/2019 19:34";
+var version = "5.3_8";
 var tip_text_brightness = 255;
 var facebook_button;
 var github_button;
 var change_dance_button;
 var tips_time = 600;
+var prev_mouseX;
+var prev_mouseY;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -40,10 +42,21 @@ function setup() {
   change_dance_button.class('nextdance');
   change_dance_button.position(20, -50);
   change_dance_button.mousePressed(nextDance);
+  prev_mouseX = mouseX;
+  prev_mouseY = mouseY;
 }
 
 function draw() {
   background(0);
+  if(frameCount % 120 == 0) {
+    if(mouseX === prev_mouseX && mouseY === prev_mouseY && !show_settings) {
+      noCursor();
+    } else {
+      cursor('default');
+    }
+    prev_mouseX = mouseX;
+    prev_mouseY = mouseY;
+  }
 
   if(tips_time >= 0) {
     if(tips_time < 256) {
@@ -100,6 +113,11 @@ function draw() {
   }
   if(show_settings) {
     showSettings();
+    if(mouseX >= 360) {
+      cursor('pointer');
+    } else {
+      cursor('default');
+    }
   } else if(mouseX < 64 && mouseX >= 0 &&
             mouseY >= height/4 && mouseY <= height-height/4 && focused) {
     noStroke();
@@ -109,6 +127,11 @@ function draw() {
     strokeWeight(2);
     line(6, height/2-12, 18, height/2);
     line(6, height/2+12, 18, height/2);
+
+    if(mouseX >= 0 && mouseX <= 24 && mouseY >= height/4 && mouseY <= 3*height/4) {
+      cursor('pointer');
+    }
+
   }
 
   // fill(15, 15, 60);
@@ -184,6 +207,10 @@ function mousePressed() {
     github_button.position(20, height - 130);
     change_dance_button.position(180, 145);
   }
+}
+
+function mouseMoved() {
+  cursor('default');
 }
 
 function nextDance() {
