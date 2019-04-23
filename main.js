@@ -7,8 +7,8 @@ var sum;
 var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
-var last_update = "2/4/2019 19:34";
-var version = "5.3_8";
+var last_update = "23/4/2019 13:06";
+var version = "5.3_9";
 var tip_text_brightness = 255;
 var facebook_button;
 var github_button;
@@ -48,6 +48,7 @@ function setup() {
 
 function draw() {
   background(0);
+  frameRate(50);
   if(frameCount % 120 == 0) {
     if(mouseX === prev_mouseX && mouseY === prev_mouseY && !show_settings) {
       noCursor();
@@ -145,6 +146,21 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
   } else {
     resizeCanvas(displayWidth, displayHeight);
+  }
+  if(show_settings) {
+    if(height > 320) {
+      facebook_button.position(180, height - 130);
+      github_button.position(20, height - 130);
+      change_dance_button.position(180, 145);
+    } else if(height > 271) {
+      facebook_button.position(20, -50);
+      github_button.position(20, -50);
+      change_dance_button.position(180, 145);
+    } else {
+      facebook_button.position(20, -50);
+      github_button.position(20, -50);
+      change_dance_button.position(20, -50);
+    }
   }
   sum = 0;
   counter = 0;
