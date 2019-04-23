@@ -48,7 +48,7 @@ function setup() {
 
 function draw() {
   background(0);
-  frameRate(50);
+  frameRate(40);
   if(frameCount % 120 == 0) {
     if(mouseX === prev_mouseX && mouseY === prev_mouseY && !show_settings) {
       noCursor();
