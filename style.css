@@ -1,3 +1,7 @@
+body {
+  background-color: lightblue;
+}
+
 .slider {
   -webkit-appearance: none;
   height: 15px;

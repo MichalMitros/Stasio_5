@@ -8,7 +8,7 @@ var sensitivity_slider;
 var dance_frequency_slider;
 var show_settings = false;
 var last_update = "23/4/2019 13:06";
-var version = "5.3_9";
+var version = "5.4";
 var tip_text_brightness = 255;
 var facebook_button;
 var github_button;
@@ -16,6 +16,17 @@ var change_dance_button;
 var tips_time = 600;
 var prev_mouseX;
 var prev_mouseY;
+var use_localStorage;
+p5.disableFriendlyErrors = true;
+
+function preload() {
+  if (typeof(Storage) !== "undefined") {
+    use_localStorage = true;
+  } else {
+    alert("Sorry!\nYour browser does not meet the minimum requirements.\nSome features will be unavailable.");
+    use_localStorage = false;
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,7 +37,7 @@ function setup() {
   counter = 0;
   prev_vol = 0;
   sum = 0;
-  sensitivity_slider = createSlider(0.0001, 0.005, 0.005, 0.00005);
+  sensitivity_slider = createSlider(0.00001, 0.0005, 0.0001, 0.000005);
   sensitivity_slider.position(20, -50);
   sensitivity_slider.class("slider");
   dance_frequency_slider = createSlider(-0.002, 0.102, 0.05, 0.026);
@@ -44,11 +55,14 @@ function setup() {
   change_dance_button.mousePressed(nextDance);
   prev_mouseX = mouseX;
   prev_mouseY = mouseY;
+
+  getDataFromLocalStorage();
+  background(0);
 }
 
 function draw() {
   background(0);
-  frameRate(50);
+  frameRate(60);
   if(frameCount % 120 == 0) {
     if(mouseX === prev_mouseX && mouseY === prev_mouseY && !show_settings) {
       noCursor();
@@ -59,22 +73,22 @@ function draw() {
     prev_mouseY = mouseY;
   }
 
-  if(tips_time >= 0) {
-    if(tips_time < 256) {
-      tip_text_brightness--;
-    }
-    if(height < width) {
-      textSize(height/40);
-    } else {
-      textSize(width/40);
-    }
-    stroke(0);
-    fill(tip_text_brightness);
-    textAlign(RIGHT);
-    text("Press F to turn on/off fullscreen mode", width-30, height-30);
-    textAlign(LEFT);
-    tips_time--;
-  }
+  // if(tips_time >= 0) {
+  //   if(tips_time < 256) {
+  //     tip_text_brightness--;
+  //   }
+  //   if(height < width) {
+  //     textSize(height/40);
+  //   } else {
+  //     textSize(width/40);
+  //   }
+  //   stroke(0);
+  //   fill(tip_text_brightness);
+  //   textAlign(RIGHT);
+  //   text("Press F to turn on/off fullscreen mode", width-30, height-30);
+  //   textAlign(LEFT);
+  //   tips_time--;
+  // }
 
   noFill();
   stroke(255);
@@ -96,8 +110,9 @@ function draw() {
     if(delta < 0) {
       delta = 0;
     }
+
     sum++;
-    if((stasio.getMultiplier()*delta>0.0051-sensitivity_slider.value() && sum > 7)
+    if((delta>0.0081-sensitivity_slider.value() && sum > 9)
         || stasio.dances[stasio.present_dance].poses[stasio.present_pose].isTransitional === true) {
       sum = 0;
       stasio.changePose();
@@ -119,8 +134,8 @@ function draw() {
     } else {
       cursor('default');
     }
-  } else if(mouseX < 64 && mouseX >= 0 &&
-            mouseY >= height/4 && mouseY <= height-height/4 && focused) {
+  } else if((mouseX < 64 && mouseX >= 0 &&
+            mouseY >= height/4 && mouseY <= height-height/4) && focused) {
     noStroke();
     fill(32);
     rect(-5, height/4, 29, height/2, 5);
@@ -135,7 +150,7 @@ function draw() {
 
   }
 
-  // fill(15, 15, 60);
+  // fill(30, 30, 120);
   // noStroke();
   // textSize(50);
   // text("TEST VERSION", width-400, 70);
@@ -148,14 +163,14 @@ function windowResized() {
     resizeCanvas(displayWidth, displayHeight);
   }
   if(show_settings) {
-    if(height > 320) {
+    if(height > 376) {
       facebook_button.position(180, height - 130);
       github_button.position(20, height - 130);
-      change_dance_button.position(180, 145);
-    } else if(height > 271) {
+      change_dance_button.position(180, 201);
+    } else if(height > 327) {
       facebook_button.position(20, -50);
       github_button.position(20, -50);
-      change_dance_button.position(180, 145);
+      change_dance_button.position(180, 201);
     } else {
       facebook_button.position(20, -50);
       github_button.position(20, -50);
@@ -188,11 +203,11 @@ function keyPressed() {
       change_dance_button.position(20, -50);
     } else {
       show_settings = true;
-      sensitivity_slider.position(20, 50);
-      dance_frequency_slider.position(20, 110);
+      sensitivity_slider.position(20, 106);
+      dance_frequency_slider.position(20, 166);
       facebook_button.position(180, height - 130);
       github_button.position(20, height - 130);
-      change_dance_button.position(180, 145);
+      change_dance_button.position(180, 201);
     }
   }
   if(key == 'f') {
@@ -217,11 +232,54 @@ function mousePressed() {
     change_dance_button.position(20, -50);
   } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
-    sensitivity_slider.position(20, 50);
-    dance_frequency_slider.position(20, 110);
+    sensitivity_slider.position(20, 106);
+    dance_frequency_slider.position(20, 166);
     facebook_button.position(180, height - 130);
     github_button.position(20, height - 130);
-    change_dance_button.position(180, 145);
+    change_dance_button.position(180, 201);
+  }
+}
+
+function getDataFromLocalStorage() {
+  if(use_localStorage) {
+    var data;
+
+    data = localStorage.getItem("danceId");
+    if(data !== null && data !== undefined) {
+      data = parseInt(data);
+      if(data >= 0 && data < stasio.dances.length) {
+        stasio.present_dance = data;
+      }
+    }
+
+    data = localStorage.getItem("poseId");
+    if(data !== null && data !== undefined) {
+      data = parseInt(data);
+      if(data >= 0 && data < stasio.dances[stasio.present_dance].length) {
+        stasio.present_pose = data;
+      }
+    }
+
+    data = localStorage.getItem("danceFrequency");
+    if(data !== null && data !== undefined) {
+      data = Number(data);
+      dance_frequency_slider.value(data);
+    }
+
+    data = localStorage.getItem("sensitivity");
+    if(data !== null && data !== undefined) {
+      data = Number(data);
+      sensitivity_slider.value(data);
+    }
+  }
+}
+
+function saveDataToLocalStorage() {
+  if(use_localStorage) {
+    localStorage.setItem("danceId", stasio.present_dance);
+    localStorage.setItem("poseId", stasio.present_pose);
+    localStorage.setItem("danceFrequency", dance_frequency_slider.value());
+    localStorage.setItem("sensitivity", sensitivity_slider.value());
   }
 }
 
