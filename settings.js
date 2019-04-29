@@ -36,6 +36,8 @@ function showSettings() {
   }
   text("Change dance: " + freq_text, 37, 156);
 
+  text("Fullscreen:", 37, 282);
+
   // if(height > 420) {
   //   textSize(14);
   //   text("dance_id: "+stasio.present_dance, 40, 240);

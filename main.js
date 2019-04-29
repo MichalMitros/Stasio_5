@@ -13,6 +13,7 @@ var tip_text_brightness = 255;
 var facebook_button;
 var github_button;
 var change_dance_button;
+var fullscreen_button;
 var tips_time = 600;
 var prev_mouseX;
 var prev_mouseY;
@@ -53,6 +54,10 @@ function setup() {
   change_dance_button.class('nextdance');
   change_dance_button.position(20, -50);
   change_dance_button.mousePressed(nextDance);
+  fullscreen_button = createButton('OFF');
+  fullscreen_button.class('nextdance');
+  fullscreen_button.position(20, -50);
+  fullscreen_button.mousePressed(toggleFullscreen);
   prev_mouseX = mouseX;
   prev_mouseY = mouseY;
 
@@ -201,6 +206,7 @@ function keyPressed() {
       facebook_button.position(20, -50);
       github_button.position(20, -50);
       change_dance_button.position(20, -50);
+      fullscreen_button.position(20, -50);
     } else {
       show_settings = true;
       sensitivity_slider.position(20, 106);
@@ -208,17 +214,11 @@ function keyPressed() {
       facebook_button.position(180, height - 130);
       github_button.position(20, height - 130);
       change_dance_button.position(180, 201);
+      fullscreen_button.position(180, 253);
     }
   }
   if(key == 'f') {
-    var fs = fullscreen();
-    fullscreen(!fs);
-    windowResized();
-    if(!fs) {
-      tips_time = 600;
-      tip_text_brightness = 255;
-    }
-    redraw();
+    toggleFullscreen();
   }
 }
 
@@ -230,6 +230,7 @@ function mousePressed() {
     facebook_button.position(20, -50);
     github_button.position(20, -50);
     change_dance_button.position(20, -50);
+    fullscreen_button.position(180, -50);
   } else if(mouseX < 24 && mouseX >= 0 && mouseY >= height/4 && mouseY <= height-height/4) {
     show_settings = true;
     sensitivity_slider.position(20, 106);
@@ -237,7 +238,31 @@ function mousePressed() {
     facebook_button.position(180, height - 130);
     github_button.position(20, height - 130);
     change_dance_button.position(180, 201);
+    fullscreen_button.position(180, 253);
   }
+}
+
+function doubleClicked() {
+  if(!show_settings && !(mouseX < 24 && mouseX >= 0 &&
+            mouseY >= height/4 && mouseY <= height-height/4) && focused) {
+    toggleFullscreen();
+  }
+}
+
+function toggleFullscreen() {
+  var fs = fullscreen();
+  fullscreen(!fs);
+  windowResized();
+  if(!fs) {
+    tips_time = 600;
+    tip_text_brightness = 255;
+  }
+  redraw();
+  updateFullscreenButton();
+}
+
+function updateFullscreenButton() {
+  fullscreen_button.html(fullscreen() ? 'OFF' : 'ON');
 }
 
 function getDataFromLocalStorage() {
