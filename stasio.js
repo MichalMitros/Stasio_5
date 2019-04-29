@@ -43,6 +43,8 @@ class Stasio {
       this.isAnimated = true;
     }
     counter = 0;
+    saveDataToLocalStorage();
+    getDataFromLocalStorage();
   }
 
   changeDance() {
@@ -61,6 +63,7 @@ class Stasio {
     if(this.dances[this.present_dance].isAnimated) {
       this.isAnimated = true;
     }
+    saveDataToLocalStorage();
   }
 
   getMultiplier() {
@@ -123,6 +126,9 @@ class Stasio {
     strokeWeight(this.scale/7);
     noFill();
     stroke(255);
+    if(frameCount < 240) {
+      stroke((255/240)*frameCount);
+    }
 
     // HANDS
     line(pose.left_arm_shoulder_x*this.scale, pose.left_arm_shoulder_y*this.scale,
@@ -167,6 +173,9 @@ class Stasio {
     strokeWeight(this.scale/7);
     noFill();
     stroke(255);
+    if(frameCount < 240) {
+      stroke((255/240)*frameCount);
+    }
 
     // HANDS
     line(pose.left_arm_shoulder_x*this.scale, pose.left_arm_shoulder_y*this.scale,

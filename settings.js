@@ -1,14 +1,13 @@
 var _fps = 60;
 
 function showSettings() {
-  textSize(20);
-  fill(48);
   noStroke();
-  rect(0, 0, 360, height);
   strokeWeight(10);
   fill(32);
-  rect(360, 0, 6, height);
+  rect(-50, 0, 416, height, 16, 16);
   rect(360, height/4, 24, height/2, 5);
+  fill(48);
+  rect(6, 56, 354, height-62, 16, 16);
   stroke(128);
   strokeWeight(2);
   line(366, height/2, 378, height/2-12);
@@ -16,7 +15,12 @@ function showSettings() {
   fill(255);
   noStroke();
   strokeWeight(1);
-  text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00005, 0.005, 0, 100))+"%", 37, 40);
+  textSize(38);
+  textAlign(CENTER);
+  text("Stasio", 180, 42);
+  textSize(20);
+  textAlign(LEFT);
+  text("Sensitivity: "+floor(map(sensitivity_slider.value(), 0.00001, 0.0005, 1, 100))+"%", 37, 96);
   let freq_text = "";
   let freq = dance_frequency_slider.value();
   if(freq > 0.1) {
@@ -30,7 +34,9 @@ function showSettings() {
   } else {
     freq_text = "never";
   }
-  text("Change dance: " + freq_text, 37, 100);
+  text("Change dance: " + freq_text, 37, 156);
+
+  text("Fullscreen:", 37, 282);
 
   // if(height > 420) {
   //   textSize(14);
